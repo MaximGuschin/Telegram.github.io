@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход в Telegram</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            width: 350px;
+            text-align: center;
+        }
+        h2 {
+            margin: 0 0 10px;
+        }
+        p {
+            margin: 5px 0 15px;
+            font-size: 0.9em;
+            color: #777;
+        }
+        select, input[type="tel"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        input[type="tel"] {
+            letter-spacing: 2px; /* Пространство между символами для ввода номера */
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-bottom: 10px;
+        }
+        button#next {
+            background-color: #0088cc;
+        }
+        button#next:hover {
+            background-color: #007bb5;
+        }
+        button#qr-code {
+            background: none;
+            color: #0088cc;
+            border: none;
+            text-decoration: underline;
+        }
+        button#qr-code:hover {
+            color: #007bb5;
+        }
+        #keep-signed-in {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+        #keep-signed-in input {
+            margin-right: 5px;
+        }
+        .country-info {
+            margin-bottom: 10px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="tgg (1).webp">
+        <h2>Sign in to Telegram</h2>
+        <p>Please confirm your country and enter your phone number.</p>
+
+        <div class="country-info">
+            <label for="country"><strong>Country:</strong></label>
+            <select id="country" onchange="updatePhonePlaceholder()">
+                <option value="+7">Россия (+7)</option>
+                <option value="+7">Казахстан (+7)</option>
+                <option value="+1">США (+1)</option>
+                <option value="+44">Великобритания (+44)</option>
+                <option value="+49">Германия (+49)</option>
+            </select>
+        </div>
+
+        <input type="tel" id="phone-number" placeholder="+7 --------" maxlength="10" oninput="formatPhoneNumber(this)"/>
+        
+        <div id="keep-signed-in">
+            <input type="checkbox" id="keepSignedIn"> Keep me signed in
+        </div>
+
+        <button id="next" onclick="handleNext()">NEXT</button>
+        <button id="qr-code" onclick="window.location.href='index.html'">LOG IN BY QR CODE</button>
+    </div>
+
+    <script>
+        function formatPhoneNumber(input) {
+            let value = input.value.replace(/\D/g, ''); // Удаляем все нецифровые символы
+            const countryCode = document.getElementById('country').value;
+
+            // Установите максимум ввода
+            if (value.length > 10) {
+                value = value.slice(0, 10); // Ограничиваем длину ввода
+            }
+
+            // Форматируем номер телефона
+            let formattedValue = countryCode + ' ';
+            if (value.length > 0) {
+                for (let i = 0; i < value.length; i++) {
+                    // Добавляем пробелы после 2 и 5 цифр
+                    if (i === 2 || i === 5) {
+                        formattedValue += ' ';
+                    }
+                    formattedValue += value[i];
+                }
+            }
+            input.value = formattedValue;
+        }
+
+        function updatePhonePlaceholder() {
+            const country = document.getElementById('country').value;
+            const phoneNumberField = document.getElementById('phone-number');
+            phoneNumberField.placeholder = country + ' --------';
+            phoneNumberField.value = ''; // Сброс значения при смене страны
+        }
+
+        function handleNext() {
+            const phone = document.getElementById('phone-number').value;
+            if (!phone || phone.length < 8) {
+                alert("Пожалуйста, введите корректный номер телефона.");
+            } else {
+                alert(`Вы ввели номер: ${phone}`);
+                // Дальше можно добавить логику отправки номера на сервер или переход на другую страницу
+            }
+        }
+    </script>
+</body>
+</html>

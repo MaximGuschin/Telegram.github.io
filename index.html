@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telegram Web</title>
+    <link rel="icon" href="tg.png" type="image/png">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh; /* Центрирует содержимое по вертикали */
+            margin: 0; /* Убирает отступы у body */
+            background-color: #f0f0f0; /* Цвет фона */
+        }
+
+        h1 {
+            margin-bottom: 20px; /* Отступ под заголовком */
+        }
+
+        ol {
+            list-style-position: inside; /* Позволяет настроить положение маркеров в списке */
+            max-width: 400px; /* Ограничение ширины списка для лучшего восприятия */
+            text-align: left; /* Выравнивание текста по левому краю */
+            margin-bottom: 20px; /* Отступ снизу */
+            padding-left: 0; /* Убираем внутренний отступ */
+        }
+
+        li {
+            color: #555; /* Цвет текста для улучшения видимости */
+            margin-bottom: 10px; /* Отступ между элементами списка */
+        }
+
+        #myButton {
+            background-color: transparent; /* Без заливки */
+            color: #0088cc; /* Цвет текста голубой */
+            border: 2px solid #0088cc; /* Обводка цветом голубым */
+            border-radius: 5px; /* Скругляем углы */
+            padding: 10px 20px; /* Отступы внутри кнопки */
+            font-size: 16px; /* Размер шрифта */
+            cursor: pointer; /* Курсор при наведении */
+            transition: background-color 0.3s, color 0.3s; /* Плавный переход для фона и цвета текста */
+        }
+
+        #myButton:hover {
+            background-color: #0088cc; /* Заливка при наведении */
+            color: white; /* Цвет текста при наведении */
+        }
+    </style>
+</head>
+<body>
+    <h1>Log in to Telegram by QR Code</h1>
+    <ol>
+        <li>Open Telegram on your phone</li>
+        <li>Go to Settings > Devices > Link Desktop Device</li>
+        <li>Point your phone at this screen to confirm login</li>
+    </ol>
+
+    <button id="myButton">Log in by Phone Number</button>
+
+    <script>
+        document.getElementById("myButton").onclick = function() {
+            window.location.href = "2index.html"; // Укажите правильный файл для перехода
+        };
+    </script>
+</body>
+</html>
